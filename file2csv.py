@@ -27,10 +27,7 @@ def convertToCSV(input_filenames, output_filename, lines_to_convert):
 
         i = 0
         for line in open(file_name, "r"):
-            if("," in line):
-                column_data[i] = "\""+line+"\""
-            else:
-                column_data[i] = line
+            column_data[i] = "\""+line.replace("\\", "")+"\""
             i += 1
 
         csv_data[column_name] = column_data
