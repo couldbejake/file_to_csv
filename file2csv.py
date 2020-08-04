@@ -1,13 +1,15 @@
-##################################################
-## Converts flat file(s) to a .csv file
-##################################################################################
-## Author: Jake Nelson
-## Credits: [Danny Wilde]
-## Version: 1.0.0
-## GitHub: https://github.com/couldbejake
-##################################################################################################################
+#  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  
+#                       Converts flat file(s) to a .csv file                     #
+#  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  
+##
+##      Author: Jake Nelson
+##      Credits: [Danny Wilde]
+##      Version: 1.0.0
+##      GitHub: https://github.com/couldbejake
 
 import argparse
+
+#  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  
 import os
 import sys
 import time
@@ -15,8 +17,8 @@ import csv
 
 def convertToCSV( input_filenames, output_filename, lines_to_convert ):
     
-    f_out = open( output_filename, "w" )
-    f_out.write( ','.join( map( str, input_filenames ) ) + "\n" )
+    f_out = open( output_filename, " w " )
+    f_out.write( ' , ' . join( map( str, input_filenames ) ) + " \n " )
 
     csv_data = { }
 
@@ -27,7 +29,7 @@ def convertToCSV( input_filenames, output_filename, lines_to_convert ):
 
         i = 0
         for line in open( file_name, "r" ):
-            column_data[ i ] = "\"" + line.replace("\\", "") + "\""
+            column_data[ i ] = " \" " + line.replace( " \\ ", "" ) + " \" "
             i += 1
 
         csv_data[ column_name ] = column_data
@@ -38,7 +40,7 @@ def convertToCSV( input_filenames, output_filename, lines_to_convert ):
     else:
         line_count = lines_to_convert
 
-    for i in range(line_count):
+    for i in range( line_count ):
 
         line_data = []
         
@@ -64,7 +66,7 @@ if __name__ == "__main__":
 
     input_filenames = args.input
 
-    if(args.output != None):
+    if( args.output != None ):
         output_filename = args.output[ 0 ]
     else:
         output_filename = "output.csv"
@@ -95,8 +97,8 @@ if __name__ == "__main__":
             
             sys.exit()
 
-    print( "Loading data from input files '"+', '.join( map( str, input_filenames ) )+ "' into '" + output_filename + "'" )
+    print( "Loading data from input files '" + ', '.join( map( str, input_filenames ) )+ "' into '" + output_filename + "'" )
     
     converted_line_count = convertToCSV( input_filenames, output_filename, lines_to_convert )
 
-    print("(Succesfully converted "+str( converted_line_count ) + " lines in " + str( "{0:.2f}".format( time.time() - proc_start) ) + " seconds! )")
+    print("(Succesfully converted "+str( converted_line_count ) + " lines in " + str( " {0:.2f} ".format( time.time() - proc_start ) ) + " seconds! )")
